@@ -45,6 +45,9 @@ ENV \
     DOTNET_INSTALL_DIR=/usr/share/dotnet/ \
     DOTNET_ROOT=/usr/share/dotnet/
 
+USER vscode
+ENV HOME /home/vscode
+
 COPY ./.devcontainer/install-dotnets.sh global.json* .
 
 RUN /bin/bash install-dotnets.sh
@@ -57,6 +60,3 @@ RUN  dotnet --info
 # Copy endpoint specific user settings into container to specify
 # .NET Core should be used as the runtime.
 COPY ./.devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
-USER vscode
-ENV HOME /home/vscode
